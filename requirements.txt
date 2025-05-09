@@ -1,0 +1,13 @@
+langchain
+openai
+chromadb
+faiss-cpu  # Optional if you use FAISS instead of Chroma
+tiktoken
+streamlit  # Or Flask if you prefer
+python-dotenv  # For API key management
+pypdf
+langchain-google-genai 
+google-generativeai
+langchain-community
+langchain-chroma
+# langchain-chromadb
