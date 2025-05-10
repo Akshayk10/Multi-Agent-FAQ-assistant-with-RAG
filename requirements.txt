@@ -1,5 +1,5 @@
 langchain
-sqlite3
+sqlite3>= 3.35.0
 openai
 chromadb
 faiss-cpu  # Optional if you use FAISS instead of Chroma
