@@ -8,6 +8,9 @@ venv/
 env/
 ENV/
 
+.env
+.streamlit/secrets.toml
+
 # Database files
 db/
 
