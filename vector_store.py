@@ -17,7 +17,7 @@ def create_vector_store(chunks, persist_directory="db"):
     api_key = load_env_vars()
     embeddings = GoogleGenerativeAIEmbeddings(
         model="models/embedding-001",
-        google_api_key=GOOGLE_API_KEY
+        google_api_key=api_key
     )
     
     # Create vector store with persist_directory
