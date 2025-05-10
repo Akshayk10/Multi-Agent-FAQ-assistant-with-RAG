@@ -1,4 +1,5 @@
 langchain
+sqlite3
 openai
 chromadb
 faiss-cpu  # Optional if you use FAISS instead of Chroma
