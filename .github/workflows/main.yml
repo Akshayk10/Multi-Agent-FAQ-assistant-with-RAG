@@ -1,4 +1,4 @@
-name: GCP Authentication Workflow
+name: RAG Assistant CI/CD
 
 on:
   push:
@@ -23,10 +23,37 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
-    - name: Set up Google Cloud Auth
-      uses: google-github-actions/auth@v1
-      with:
-        credentials_json: ${{ secrets.GOOGLE_API_KEY  }}
+    - name: Set up environment variables
+      env:
+        GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      run: |
+        # Verify API key is available (for debugging)
+        if [ -z "$GOOGLE_API_KEY" ]; then
+          echo "API key not set!"
+          exit 1
+        else
+          echo "API key configured successfully"
+        fi
     
-    - name: Run your script
-      run: python your_script.py  # Replace with your actual script name
+    - name: Run Streamlit tests
+      run: |
+        # Test if the API key works
+        python -c "
+        from langchain_google_genai import GoogleGenerativeAIEmbeddings
+        import os
+        try:
+            embeddings = GoogleGenerativeAIEmbeddings(
+                model='models/embedding-001',
+                google_api_key=os.environ['GOOGLE_API_KEY']
+            )
+            print('Authentication successful!')
+        except Exception as e:
+            print(f'Authentication failed: {str(e)}')
+            exit(1)
+        "
+    
+    - name: Lint Python code
+      run: |
+        pip install black flake8
+        black --check .
+        flake8 .
