@@ -26,7 +26,7 @@ jobs:
     - name: Set up Google Cloud Auth
       uses: google-github-actions/auth@v1
       with:
-        credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
+        credentials_json: ${{ secrets.GOOGLE_API_KEY  }}
     
     - name: Run your script
       run: python your_script.py  # Replace with your actual script name
